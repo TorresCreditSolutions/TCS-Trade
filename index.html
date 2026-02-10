@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar Trading</title>
+<style>
+body{
+    font-family: Arial;
+    text-align:center;
+    background:#0f172a;
+    color:white;
+}
+.card{
+    background:#1e293b;
+    padding:20px;
+    margin:20px;
+    border-radius:12px;
+}
+</style>
+</head>
+<body>
+
+<h1>Radar Trading Sniper</h1>
+
+<div class="card">
+<h2>WIN</h2>
+<p id="win"></p>
+</div>
+
+<div class="card">
+<h2>FOREX</h2>
+<p id="forex"></p>
+</div>
+
+<script>
+async function carregar(){
+    const r = await fetch("/radar");
+    const d = await r.json();
+    document.getElementById("win").innerHTML =
+        d.WIN.sinal + " | Prob: " + d.WIN.probabilidade;
+    document.getElementById("forex").innerHTML =
+        d.FOREX.sinal + " | Prob: " + d.FOREX.probabilidade;
+}
+setInterval(carregar,3000);
+carregar();
+</script>
+
+</body>
+</html>
